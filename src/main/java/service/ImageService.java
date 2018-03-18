@@ -11,51 +11,51 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
  
-import dao.ProductDAO;
-import model.Product;
+import dao.ImageDAO;
+import model.Image;
  
-@Path("products")
-public class ProductService {
+@Path("images")
+public class ImageService {
  
     // URI:
-    // /contextPath/servletPath/product
+    // /contextPath/servletPath/image
     @GET
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public List<Product> getProducts_JSON() {
-        List<Product> listOfProducts = ProductDAO.getAllProducts();
-        return listOfProducts;
+    public List<Image> getImages_JSON() {
+        List<Image> listOfImages = ImageDAO.getAllImages();
+        return listOfImages;
     }
  
     // URI:
-    // /contextPath/servletPath/products/{id}
+    // /contextPath/servletPath/images/{id}
     @GET
     @Path("/{id}")
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public Product getProduct(@PathParam("id") String id) {
-        return ProductDAO.getProduct(id);
+    public Image getImage(@PathParam("id") String id) {
+        return ImageDAO.getImage(id);
     }
  
     // URI:
-    // /contextPath/servletPath/products
+    // /contextPath/servletPath/images
     @POST
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public Product addProduct(Product prod) {
-        return ProductDAO.addProduct(prod);
+    public Image addImage(Image img) {
+        return ImageDAO.addImage(img);
     }
  
     // URI:
-    // /contextPath/servletPath/products
+    // /contextPath/servletPath/images
     @PUT
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public Product updateProduct(Product prod) {
-        return ProductDAO.updateProduct(prod);
+    public Image updateImage(Image img) {
+        return ImageDAO.updateImage(img);
     }
  
     @DELETE
     @Path("/{id}")
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public void deleteProduct(@PathParam("id") String id) {
-    	ProductDAO.deleteProduct(id);
+    public void deleteImage(@PathParam("id") String id) {
+    	ImageDAO.deleteImage(id);
     }
  
 }

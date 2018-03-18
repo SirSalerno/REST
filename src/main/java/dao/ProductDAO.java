@@ -26,22 +26,22 @@ public class ProductDAO {
         prodMap.put(emp3.getProdID(), emp3);
     }
  
-    public static Product getProduct(String empNo) {
-        return prodMap.get(empNo);
+    public static Product getProduct(String id) {
+        return prodMap.get(id);
     }
  
-    public static Product addProduct(Product emp) {
-        prodMap.put(emp.getProdID(), emp);
-        return emp;
+    public static Product addProduct(Product prod) {
+        prodMap.put(prod.getProdID(), prod);
+        return prod;
     }
  
-    public static Product updateProduct(Product emp) {
-        prodMap.put(emp.getProdID(), emp);
-        return emp;
+    public static Product updateProduct(Product prod) {
+        prodMap.put(prod.getProdID(), prod);
+        return prod;
     }
  
-    public static void deleteProduct(String empNo) {
-        prodMap.remove(empNo);
+    public static void deleteProduct(String id) {
+        prodMap.remove(id);
     }
  
     public static List<Product> getAllProducts() {
