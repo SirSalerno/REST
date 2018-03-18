@@ -11,7 +11,16 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   <version>0.0.1-SNAPSHOT</version>
   <name>RESTfulCRUD Maven Webapp</name>
   <url>http://maven.apache.org</url>
- 
+ 	<repositories>
+  <repository>
+    <id>JBoss Deprecated</id>
+    <url>https://repository.jboss.org/nexus/content/repositories/deprecated</url>
+  </repository>
+  <repository>
+    <id>java.net</id>
+    <url>http://download.java.net/maven/2/</url>
+  </repository>
+</repositories>
     <dependencies>
  
         <dependency>
@@ -73,7 +82,95 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             <artifactId>jackson-mapper-asl</artifactId>
             <version>1.9.13</version>
         </dependency>
- 
+        
+          <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate</artifactId>
+            <version>3.5.1-Final</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-annotations</artifactId>
+            <version>3.5.5-Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>3.5.5-Final</version>
+        </dependency>
+        <dependency>
+            <groupId>antlr</groupId>
+            <artifactId>antlr</artifactId>
+            <version>2.7.6</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.9.0.GA</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.5.8</version>
+            <type>pom</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>ejb3-persistence</artifactId>
+            <version>3.3.2.Beta1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.5.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.7.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbyclient</artifactId>
+            <version>10.7.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbynet</artifactId>
+            <version>10.7.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbytools</artifactId>
+            <version>10.7.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.security.jacc</groupId>
+    			<artifactId>javax.security.jacc-api</artifactId>
+    			<version>1.5</version>
+        </dependency>
+ 		<dependency>
+    			<groupId>org.hibernate</groupId>
+    			<artifactId>hibernate-validator</artifactId>
+   			<version>5.1.2.Final</version>
+		</dependency>
  
     </dependencies>
  
@@ -86,10 +183,16 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 <version>2.2</version>
                 <configuration>
                     <path>/RESTfulCRUD</path>
-                    <port>8080</port>
+                    <port>8081</port>
                 </configuration>
             </plugin>
- 
+ 			<plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
  

@@ -20,7 +20,7 @@ public class ProductService {
     // URI:
     // /contextPath/servletPath/product
     @GET
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    @Produces({MediaType.APPLICATION_XML })
     public List<Product> getProducts_JSON() {
         List<Product> listOfProducts = ProductDAO.getAllProducts();
         return listOfProducts;
@@ -30,7 +30,7 @@ public class ProductService {
     // /contextPath/servletPath/products/{id}
     @GET
     @Path("/{id}")
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    @Produces({MediaType.APPLICATION_XML })
     public Product getProduct(@PathParam("id") String id) {
         return ProductDAO.getProduct(id);
     }
@@ -38,7 +38,7 @@ public class ProductService {
     // URI:
     // /contextPath/servletPath/products
     @POST
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    @Produces({MediaType.APPLICATION_XML })
     public Product addProduct(Product prod) {
         return ProductDAO.addProduct(prod);
     }
@@ -46,14 +46,14 @@ public class ProductService {
     // URI:
     // /contextPath/servletPath/products
     @PUT
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    @Produces({MediaType.APPLICATION_XML })
     public Product updateProduct(Product prod) {
         return ProductDAO.updateProduct(prod);
     }
  
     @DELETE
     @Path("/{id}")
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    @Produces({MediaType.APPLICATION_XML })
     public void deleteProduct(@PathParam("id") String id) {
     	ProductDAO.deleteProduct(id);
     }
