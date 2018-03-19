@@ -18,7 +18,7 @@ import model.Image;
 public class ImageService {
 
 	// URI:
-	// /contextPath/servletPath/image
+	// /contextPath/servletPath/images
 	@GET
 	@Produces({MediaType.APPLICATION_XML })
 	public List<Image> getImages_XML() {
