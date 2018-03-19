@@ -4,78 +4,95 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 
 import model.Product;
 
 public class ProductDAO {
 
-	static EntityManagerFactory factory = Persistence.createEntityManagerFactory("derby");
+	private static ProductDAO instance;
+	protected EntityManager entityManager;
 
-	static {
-		initEmps();
+	public static ProductDAO getInstance() {
+		if (instance == null) {
+			instance = new ProductDAO();
+		}
+
+		return instance;
 	}
 
-	private static void initEmps() {
+	private ProductDAO() {
+		entityManager = getEntityManager();
 		Product emp1 = new Product("1", "Product1", "sample product", null);
-		addProduct(emp1);
+		persist(emp1);
 		Product emp2 = new Product("2", "Product2", "sample sub-product", "1");
-		addProduct(emp2);
+		persist(emp2);
 		Product emp3 = new Product("3", "Product3", "sample product", null);
-		addProduct(emp3);
-
+		persist(emp3);
 	}
 
-	public static Product getProduct(String id) {
-		return getEntityManager().find(Product.class, id);
+	private EntityManager getEntityManager() {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("derby");
+		if (entityManager == null) {
+			entityManager = factory.createEntityManager();
+		}
+
+		return entityManager;
 	}
 
-	public static Product addProduct(Product prod) {
+	public Product getById(String id) {
+		return entityManager.find(Product.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Product> findAll() {
+		return entityManager.createQuery("FROM " + Product.class.getName()).getResultList();
+	}
+
+	public Product persist(Product Product) {
 		try {
-			getEntityManager().getTransaction().begin();
-			getEntityManager().persist(prod);
-			getEntityManager().getTransaction().commit();
+			if (getById(Product.getProdID()) == null) {
+				entityManager.getTransaction().begin();
+				entityManager.persist(Product);
+				entityManager.getTransaction().commit();
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			getEntityManager().getTransaction().rollback();
+			entityManager.getTransaction().rollback();
 		}
-		return getProduct(prod.getProdID());
+		return getById(Product.getProdID());
 	}
 
-	public static Product updateProduct(Product prod) {
+	public Product merge(Product Product) {
 		try {
-			getEntityManager().getTransaction().begin();
-			getEntityManager().merge(prod);
-			getEntityManager().getTransaction().commit();
+			entityManager.getTransaction().begin();
+			entityManager.merge(Product);
+			entityManager.getTransaction().commit();
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			getEntityManager().getTransaction().rollback();
+			entityManager.getTransaction().rollback();
 		}
-		return getProduct(prod.getProdID());
+		return getById(Product.getProdID());
 	}
 
-	public static void deleteProduct(String id) {
+	public void remove(Product Product) {
 		try {
-			getEntityManager().getTransaction().begin();
-			Product prod = getEntityManager().find(Product.class, id);
-			getEntityManager().remove(prod);
-			getEntityManager().getTransaction().commit();
+			entityManager.getTransaction().begin();
+			Product = entityManager.find(Product.class, Product.getProdID());
+			entityManager.remove(Product);
+			entityManager.getTransaction().commit();
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			getEntityManager().getTransaction().rollback();
+			entityManager.getTransaction().rollback();
 		}
 	}
 
-	public static List<Product> getAllProducts() {
-		return getEntityManager().createQuery("FROM " + Product.class.getName()).getResultList();
+	public void removeById(String id) {
+		try {
+			Product Product = getById(id);
+			remove(Product);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
-
-	public static EntityManager getEntityManager() {
-		return factory.createEntityManager();
-	}
-
-	List<Product> list;
-
 }

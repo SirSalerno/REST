@@ -1,14 +1,14 @@
 ----------------------------------------------------------------
-Sun Mar 18 15:01:05 BRT 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.7.1.1 - (1040133): instance a816c00e-0162-3a45-a521-00000f148828 
-on database directory /Users/stephaniescremin/eclipse-workspace/RESTfulCRUD/memory  with class loader WebappClassLoader
+Sun Mar 18 21:02:21 BRT 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.7.1.1 - (1040133): instance a816c00e-0162-3b90-657c-0000115cb738 
+on database directory /Users/bruno/Documents/workspace/RESTfulCRUD/memory  with class loader WebappClassLoader
   context: /RESTfulCRUD
   delegate: false
   repositories:
 ----------> Parent Classloader:
-ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: sun.misc.Launcher$AppClassLoader@3d4eac69]
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: sun.misc.Launcher$AppClassLoader@55f96302]
  
-Loaded from file:/Users/stephaniescremin/.m2/repository/org/apache/derby/derby/10.7.1.1/derby-10.7.1.1.jar
+Loaded from file:/Users/bruno/.m2/repository/org/apache/derby/derby/10.7.1.1/derby-10.7.1.1.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_162-b12
+java.runtime.version=1.8.0_25-b17
 Database Class Loader started - derby.database.classpath=''

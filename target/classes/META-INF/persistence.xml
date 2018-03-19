@@ -14,6 +14,7 @@
             <property name="hibernate.connection.url"   value="jdbc:derby:memory;create=true" />
             <property name="hibernate.connection.username" value="" />
             <property name="hibernate.connection.password" value="" />
+            <property name="show_sql" value="true"/>
             <!-- Hibernate configuration -->
         		<property name="hibernate.hbm2ddl.auto"       value="update"/>
         </properties>

@@ -22,7 +22,7 @@ public class ImageService {
 	@GET
 	@Produces({MediaType.APPLICATION_XML })
 	public List<Image> getImages_XML() {
-		List<Image> listOfImages = ImageDAO.getAllImages();
+		List<Image> listOfImages = ImageDAO.getInstance().findAll();
 		return listOfImages;
 	}
 
@@ -32,7 +32,7 @@ public class ImageService {
 	@Path("/{id}")
 	@Produces({MediaType.APPLICATION_XML })
 	public Image getImage(@PathParam("id") String id) {
-		return ImageDAO.getImage(id);
+		return ImageDAO.getInstance().getById(id);
 	}
 
 	// URI:
@@ -40,7 +40,7 @@ public class ImageService {
 	@POST
 	@Produces({MediaType.APPLICATION_XML })
 	public Image addImage(Image img) {
-		return ImageDAO.addImage(img);
+		return ImageDAO.getInstance().persist(img);
 	}
 
 	// URI:
@@ -48,14 +48,14 @@ public class ImageService {
 	@PUT
 	@Produces({MediaType.APPLICATION_XML })
 	public Image updateImage(Image img) {
-		return ImageDAO.updateImage(img);
+		return ImageDAO.getInstance().merge(img);
 	}
 
 	@DELETE
 	@Path("/{id}")
 	@Produces({MediaType.APPLICATION_XML })
 	public void deleteImage(@PathParam("id") String id) {
-		ImageDAO.deleteImage(id);
+		ImageDAO.getInstance().removeById(id);;
 	}
 
 }

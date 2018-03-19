@@ -4,88 +4,97 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 
 import model.Image;
 
 public class ImageDAO {
 
-	static EntityManagerFactory factory = Persistence.createEntityManagerFactory("derby");
+	private static ImageDAO instance;
+	protected EntityManager entityManager;
 
-	static {
-		initImgs();
+	public static ImageDAO getInstance() {
+		if (instance == null) {
+			instance = new ImageDAO();
+		}
+
+		return instance;
 	}
 
-	private static void initImgs() {
+	private ImageDAO() {
+		entityManager = getEntityManager();
 		Image img1 = new Image("1", "gif", "1");
-		addImage(img1);
+		persist(img1);
 		Image img2 = new Image("2", "png", "2");
-		addImage(img2);
+		persist(img2);
 		Image img3 = new Image("3", "jpg", "3");
-		addImage(img3);
+		persist(img3);
 		Image img4 = new Image("4", "jpg", "4");
-		addImage(img4);
+		persist(img4);
 	}
 
-	public static Image getImage(String id) {
-		return getEntityManager().find(Image.class, id);
+	private EntityManager getEntityManager() {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("derby");
+		if (entityManager == null) {
+			entityManager = factory.createEntityManager();
+		}
+
+		return entityManager;
 	}
 
-	public static Image addImage(Image img) {
-		EntityTransaction tx = getEntityManager().getTransaction();
+	public Image getById(String id) {
+		return entityManager.find(Image.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Image> findAll() {
+		return entityManager.createQuery("FROM " + Image.class.getName()).getResultList();
+	}
+
+	public Image persist(Image Image) {
 		try {
-			tx.begin();
-			getEntityManager().persist(img);
-			tx.commit();
+			if (getById(Image.getImgID()) == null) {
+				entityManager.getTransaction().begin();
+				entityManager.persist(Image);
+				entityManager.getTransaction().commit();
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			if (tx!= null)
-				if (tx.isActive())
-					getEntityManager().getTransaction().rollback();
+			entityManager.getTransaction().rollback();
 		}
-		return getImage(img.getImgID());
+		return getById(Image.getImgID());
 	}
 
-	public static Image updateImage(Image img) {
-		EntityTransaction tx = getEntityManager().getTransaction();
+	public Image merge(Image Image) {
 		try {
-			tx.begin();
-			getEntityManager().merge(img);
-			tx.commit();
+			entityManager.getTransaction().begin();
+			entityManager.merge(Image);
+			entityManager.getTransaction().commit();
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			if (tx!= null)
-				if (tx.isActive())
-					getEntityManager().getTransaction().rollback();
+			entityManager.getTransaction().rollback();
 		}
-		return getImage(img.getImgID());
+		return getById(Image.getImgID());
 	}
 
-	public static void deleteImage(String id) {
-		EntityTransaction tx = getEntityManager().getTransaction();
+	public void remove(Image Image) {
 		try {
-			tx.begin();
-			Image img = getEntityManager().find(Image.class, id);
-			getEntityManager().remove(img);
-			tx.commit();
+			entityManager.getTransaction().begin();
+			Image = entityManager.find(Image.class, Image.getImgID());
+			entityManager.remove(Image);
+			entityManager.getTransaction().commit();
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			if (tx!= null)
-				if (tx.isActive())
-					getEntityManager().getTransaction().rollback();
+			entityManager.getTransaction().rollback();
 		}
 	}
 
-	public static List<Image> getAllImages() {
-		return getEntityManager().createQuery("FROM " + Image.class.getName()).getResultList();
+	public void removeById(String id) {
+		try {
+			Image Image = getById(id);
+			remove(Image);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
-
-	public static EntityManager getEntityManager() {
-		return factory.createEntityManager();
-	}
-
-	List<Image> list;
-
 }
