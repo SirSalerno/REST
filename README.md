@@ -7,15 +7,23 @@ To start the webapp, simply run "mvn tomcat:run" at the root directory.
 REST commands:
 
 GET    http://localhost:8080/RESTfulCRUD/rest/products ===============================> Lists all products (excluding relationships)
+
 GET    http://localhost:8080/RESTfulCRUD/rest/products/{id} ==========================> Lists the product that corresponds to the given id
+
 POST   http://localhost:8080/RESTfulCRUD/rest/products ===============================> Inserts product
+
 PUT    http://localhost:8080/RESTfulCRUD/rest/products ===============================> Updates product
+
 DELETE http://localhost:8080/RESTfulCRUD/rest/products/{id} ==========================> Deletes the product that corresponds to the given id
 
 GET    http://localhost:8080/RESTfulCRUD/rest/images ===============================> Lists all images (excluding relationships)
+
 GET    http://localhost:8080/RESTfulCRUD/rest/images/{id} ==========================> Lists the image that corresponds to the given id
+
 POST   http://localhost:8080/RESTfulCRUD/rest/images ===============================> Inserts image
+
 PUT    http://localhost:8080/RESTfulCRUD/rest/images ===============================> Updates image
+
 DELETE http://localhost:8080/RESTfulCRUD/rest/images/{id} ==========================> Deletes the image that corresponds to the given id
 
 Unfortunately, I couldn't manage to use Hibernate annotations to create the relationships between the objects.
