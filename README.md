@@ -4,7 +4,7 @@ Maven and a free 8080 port are necessary to run this project.
 The command "mvn test" can be used at the root directory to run Maven's tests before starting the application.
 To start the webapp, simply run "mvn tomcat:run" at the root directory.
 
-REST commands:
+## REST commands:
 
 GET    http://localhost:8080/RESTfulCRUD/rest/products ===============================> Lists all products (excluding relationships)
 
